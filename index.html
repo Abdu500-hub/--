@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونتك</title>
+    <link rel="icon" href="https://img.pikbest.com/origin/09/28/61/67rpIkbEsTS37.png!w700wp" type="image/png">
+    <style>
+        body {
+            font-family: 'Amiri', serif; /* خط عربي جمالي */
+            text-align: center;
+            margin: 0;
+            background-image: url('https://png.pngtree.com/png-clipart/20231020/original/pngtree-creative-thinking-png-png-image_13374263.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- Global Styles --- */
+        .container {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9); /* خلفية بيضاء شفافة للقراءة */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .header-section h1 {
+            font-size: 3.5em; /* خط أكبر */
+            color: #4A90E2; /* أزرق جذاب */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-section img {
+            max-width: 120px; /* حجم أكبر للوجو */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .button {
+            background-color: #28a745; /* أخضر */
+            color: white;
+            padding: 18px 35px; /* حجم أكبر للأزرار */
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em; /* خط أكبر للأزرار */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #218838; /* أخضر أغمق عند التمرير */
+            transform: translateY(-3px); /* تأثير ثلاثي الأبعاد بسيط */
+        }
+
+        /* --- Section Specific Styles --- */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.7s ease-out; /* حركة أبطأ وأكثر سلاسة */
+        }
+        .page-section.active {
+            display: block;
+        }
+
+        /* Animation for section display */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Home Page Styles --- */
+        #homePage .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        #homePage .footer-link {
+            margin-top: 60px;
+            font-size: 1.2em; /* خط أكبر */
+            color: #555;
+        }
+        #homePage .footer-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #homePage .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Blog Page Styles --- */
+        #blogPage .controls {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        #blogPage .controls select,
+        #blogPage .controls button {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #f8f8f8;
+            transition: background-color 0.3s ease;
+        }
+        #blogPage .controls select:hover,
+        #blogPage .controls button:hover {
+            background-color: #e0e0e0;
+        }
+
+        #blogPage #writingArea {
+            width: 90%; /* مساحة أكبر */
+            height: 450px; /* ارتفاع أكبر */
+            background-image: url('https://static.sayidaty.net/styles/900_scale/public/2024-08/shutterstock_2053761842_1.jpg.webp?VersionId=b_At14cYVh_5znUcwUyREzbrvJrVa1uF'); /* صورة الخلفية */
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #7F8C8D; /* حدود جذابة */
+            border-radius: 15px;
+            padding: 25px;
+            font-size: 1.4em; /* خط أكبر للكتابة */
+            line-height: 1.8;
+            resize: vertical;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            direction: rtl;
+            text-align: right;
+            color: #34495E; /* لون نص داكن لقراءة مريحة */
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+            /* Add these for better font rendering and appearance */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 400; /* Use a normal or slightly bolder weight */
+        }
+        #blogPage .action-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+        #blogPage .action-buttons-container .button {
+            display: inline-block;
+            margin: 0;
+            padding: 12px 25px;
+            font-size: 1.2em;
+        }
+        #blogPage .button.delete {
+            background-color: #E74C3C; /* أحمر جذاب للحذف */
+        }
+        #blogPage .button.delete:hover {
+            background-color: #C0392B;
+        }
+        #blogPage #message {
+            color: #27AE60; /* أخضر فاتح للمسج */
+            font-size: 1.5em; /* خط أكبر للرسالة */
+            margin-top: 25px;
+            display: none;
+            font-weight: bold;
+            animation: bounceIn 0.8s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        #blogPage .back-button {
+            background-color: #95A5A6; /* رمادي جذاب */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 35px;
+            transition: background-color 0.3s ease;
+        }
+        #blogPage .back-button:hover {
+            background-color: #7F8C8D;
+        }
+
+        /* --- Tasks Page Styles --- */
+        #tasksPage .tasks-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px; /* Reduced margin to make space for the motivational phrase */
+        }
+        #tasksPage .tasks-header h1 {
+            font-size: 3em;
+            color: #8E44AD; /* لون بنفسجي جذاب */
+        }
+        #tasksPage .tasks-header img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .motivational-section { /* هذا هو البوكس الأزرق مع الصورة والعبارة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; /* مسافة بين الصورة والنص */
+            margin-bottom: 30px;
+            padding: 15px 25px;
+            background-color: #ADD8E6; /* لون أزرق فاتح للبوكس */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 700px; /* تحديد العرض لتحسين المظهر */
+            margin-left: auto;
+            margin-right: auto;
+            flex-wrap: wrap; /* للسماح بالتفاف العناصر على الشاشات الصغيرة */
+        }
+        .motivational-section img { /* تنسيق الصورة داخل البوكس */
+            max-width: 80px; /* حجم الصورة التحفيزية */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #motivationalPhrase { /* تنسيق نص العبارة التحفيزية داخل البوكس */
+            font-size: 1.4em;
+            color: #2C3E50; /* لون نص داكن لقراءة أفضل */
+            font-weight: bold;
+            line-height: 1.5;
+            flex-grow: 1; /* للسماح للنص باستهلاك المساحة المتاحة */
+            text-align: center; /* توسيط النص داخل العنصر */
+        }
+        /* New style for the main motivational phrase on app open */
+        #appMotivationalPhrase {
+            font-size: 2.2em; /* Larger font size */
+            color: #2C3E50;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-bottom: 30px; /* Space below the phrase */
+            animation: fadeInScale 1s ease-out; /* Animation for appearance */
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+
+        #tasksPage .tasks-container-inner {
+            max-height: 500px; /* تحديد أقصى ارتفاع */
+            overflow-y: auto; /* تفعيل التمرير العمودي */
+            padding-right: 15px; /* مسافة لل scrollbar */
+            scroll-behavior: smooth;
+        }
+        /* Style for scrollbar */
+        #tasksPage .tasks-container-inner::-webkit-scrollbar {
+            width: 10px;
+        }
+        #tasksPage .tasks-container-inner::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        #tasksPage .tasks-container-inner::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        #tasksPage .tasks-container-inner::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        #tasksPage .task-item {
+            display: flex;
+            align-items: flex-start; /* لضمان محاذاة المربع مع بداية النص الطويل */
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #CCC; /* خط منقط */
+            padding-top: 5px;
+        }
+        #tasksPage .task-item:last-child {
+            border-bottom: none;
+        }
+        #tasksPage .task-checkbox {
+            margin-left: 18px;
+            transform: scale(1.8); /* حجم أكبر للمربع */
+            cursor: pointer;
+            accent-color: #28a745; /* لون أخضر لمربع الاختيار نفسه */
+            flex-shrink: 0; /* منع المربع من الانكماش */
+            margin-top: 5px; /* لمواءمة مع بداية النص */
+        }
+        /* Style for custom checkbox checkmark (if browser doesn't support accent-color well) */
+        #tasksPage .task-checkbox:checked::before {
+            color: #28a745; /* لون علامة الصح الخضراء */
+        }
+        #tasksPage .task-text {
+            flex-grow: 1;
+            font-size: 1.2em; /* خط أكبر للمهام */
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            direction: rtl;
+            text-align: right;
+            resize: vertical;
+            min-height: 45px; /* ارتفاع أدنى للبوكس */
+            box-sizing: border-box;
+            line-height: 1.5;
+            transition: background-color 0.3s ease;
+            color: #333;
+        }
+        #tasksPage .task-text.completed {
+            text-decoration: line-through;
+            color: #888;
+            background-color: #F0F0F0; /* خلفية فاتحة للمهام المكتملة */
+        }
+        /* Colors for task items - 300 lines, so we use a repeating pattern */
+        #tasksPage .task-item:nth-child(6n+1) .task-text { background-color: #F9E79F; } /* Cream */
+        #tasksPage .task-item:nth-child(6n+2) .task-text { background-color: #A3E4D7; } /* Turquoise */
+        #tasksPage .task-item:nth-child(6n+3) .task-text { background-color: #D7BDE2; } /* Lavender */
+        #tasksPage .task-item:nth-child(6n+4) .task-text { background-color: #F5B7B1; } /* Light Coral */
+        #tasksPage .task-item:nth-child(6n+5) .task-text { background-color: #B2EBF2; } /* Light Blue */
+        #tasksPage .task-item:nth-child(6n+6) .task-text { background-color: #D4EFDF; } /* Mint Green */
+
+        #tasksPage .back-button {
+            background-color: #95A5A6;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 35px;
+            transition: background-color 0.3s ease;
+        }
+        #tasksPage .back-button:hover {
+            background-color: #7F8C8D;
+        }
+
+        /* --- Links Page Styles --- */
+        #linksPage .links-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        #linksPage .links-header h1 {
+            font-size: 3em;
+            color: #E67E22; /* لون برتقالي جذاب */
+        }
+        #linksPage .links-header img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #linksPage .links-container-inner {
+            text-align: right;
+            padding: 20px 30px;
+        }
+        #linksPage .link-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #EEE;
+            padding-bottom: 15px;
+        }
+        #linksPage .link-item:last-child {
+            border-bottom: none;
+        }
+        #linksPage .link-item p {
+            font-weight: bold;
+            font-size: 1.5em; /* خط أكبر */
+            margin-bottom: 8px;
+            color: #3498DB; /* أزرق للنصوص التوضيحية */
+        }
+        #linksPage .link-item a {
+            color: #2980B9; /* أزرق داكن للروابط */
+            text-decoration: none;
+            font-size: 1.3em; /* خط أكبر للروابط */
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+        #linksPage .link-item a:hover {
+            text-decoration: underline;
+            color: #1ABC9C; /* أخضر مائي عند التمرير */
+        }
+        #linksPage .back-button {
+            background-color: #95A5A6;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 35px;
+            transition: background-color 0.3s ease;
+        }
+        #linksPage .back-button:hover {
+            background-color: #7F8C8D;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="homePage" class="page-section active container">
+        <div class="header-section">
+            <h1>مدونتك</h1>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaPIszTQ5YSZFbUANdLmIuVJrMWQCR1FoszU9mKVDRy_eZ2XYYHQk82-jTxA40-FtcS3E&usqp=CAU" alt="شعار المدونة">
+        </div>
+
+        <div id="appMotivationalPhrase"></div> <div class="buttons-container">
+            <button class="button" onclick="showPage('blogPage')">يلا ندون أفكارك</button>
+            <button class="button" onclick="showPage('tasksPage')">اكتب مهامك</button>
+            <button class="button" onclick="showPage('linksPage')">روابط مهمة</button>
+        </div>
+
+        <div class="footer-link">
+            <p>رابط موقع منارة الإسلام من نفس المطور</p>
+            <a href="https://abdu500-hub.github.io/---1/">https://abdu500-hub.github.io/---1/</a>
+        </div>
+    </div>
+
+    <div id="blogPage" class="page-section container">
+        <h1>تدوين أفكارك</h1>
+        <div class="controls">
+            <label for="fontColor">لون الخط:</label>
+            <select id="fontColor">
+                <option value="#34495E">الافتراضي (داكن)</option>
+                <option value="red">أحمر</option>
+                <option value="green">أخضر</option>
+                <option value="blue">أزرق</option>
+                <option value="black">أسود</option>
+                <option value="purple">بنفسجي</option>
+                <option value="orange">برتقالي</option>
+            </select>
+
+            <label for="fontSize">حجم الخط:</label>
+            <button onclick="changeFontSize(-2)">تصغير</button>
+            <button onclick="changeFontSize(2)">تكبير</button>
+        </div>
+        <textarea id="writingArea" placeholder="ابدأ بكتابة أفكارك هنا..."></textarea>
+        <div class="action-buttons-container">
+            <button class="button" onclick="saveContent()">حفظ ما تم كتابته</button>
+            <button class="button delete" onclick="clearContent()">حذف كل شيء</button>
+        </div>
+        <p id="message">مبروك كتبت أول 100 كلمة في مدونتك!</p>
+
+        <button class="back-button" onclick="showPage('homePage')">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <div id="tasksPage" class="page-section container">
+        <div class="tasks-header">
+            <h1>مهامك</h1>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3wKK9v4vbAdAg5NxIF8kcaHDylvenTSNWng&s" alt="صورة مهام">
+        </div>
+        <div class="motivational-section">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mt0nez0aQsvb1_GhmzRSfoBOzZtnynQmML8VZQzImLSt0Eu6hxBII1uk3ILDKOS06rk&usqp=CAU" alt="صورة تحفيزية">
+            <div id="motivationalPhrase"></div> </div>
+        <div class="tasks-container-inner" id="tasksContainer">
+        </div>
+        <button class="back-button" onclick="showPage('homePage')">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <div id="linksPage" class="page-section container">
+        <div class="links-header">
+            <h1>روابط تهمك</h1>
+            <img src="https://i.pinimg.com/474x/1e/67/5b/1e675b61c0d880d956f912b36099a98d.jpg" alt="لوجو روابط">
+        </div>
+        <div class="links-container-inner">
+            <div class="link-item">
+                <p>الرابط الأول: منارة الإسلام</p>
+                <a href="https://abdu500-hub.github.io/---1/">https://abdu500-hub.github.io/---1/</a>
+            </div>
+            <div class="link-item">
+                <p>الرابط الثاني: معلومة في دقيقة</p>
+                <a href="https://abdu500-hub.github.io/-----5/">https://abdu500-hub.github.io/-----5/</a>
+            </div>
+        </div>
+        <button class="back-button" onclick="showPage('homePage')">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <script>
+        // --- Global Page Navigation Logic ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            // Scroll to top of the page when navigating
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Specific logic for tasksPage when it becomes active
+            if (pageId === 'tasksPage') {
+                displayTasksMotivationalPhrase(); // Changed function name for clarity
+            }
+            // Hide app-wide phrase when navigating away from home page
+            if (pageId !== 'homePage') {
+                document.getElementById('appMotivationalPhrase').style.display = 'none';
+            } else {
+                displayAppMotivationalPhrase(); // Show app-wide phrase if returning to home page
+            }
+        }
+
+        // --- App-Wide Motivational Phrase Logic ---
+        const appMotivationalPhrases = [
+            'النجاح يبدأ بقرار.',
+            'لا تتوقف عندما تتعب، توقف عندما تنتهي.',
+            'اجعل كل يوم تحفة فنية.',
+            'كل خطوة صغيرة تقربك من هدفك.',
+            'أنت أقوى مما تتخيل.',
+            'العمل الجاد يؤتي ثماره دائمًا.',
+            'ابدأ الآن، ليس غدًا.',
+            'التفاؤل هو مفتاح كل نجاح.',
+            'كن التغيير الذي تريد أن تراه في العالم.',
+            'إيمانك بقدراتك هو سر قوتك.'
+        ];
+
+        function displayAppMotivationalPhrase() {
+            const phraseElement = document.getElementById('appMotivationalPhrase');
+            if (phraseElement) {
+                const randomIndex = Math.floor(Math.random() * appMotivationalPhrases.length);
+                phraseElement.textContent = appMotivationalPhrases[randomIndex];
+                phraseElement.style.display = 'block'; // Make sure it's visible
+            }
+        }
+
+        // Call this function when the page loads initially
+        window.addEventListener('load', displayAppMotivationalPhrase);
+
+
+        // --- Blog Page Specific JavaScript ---
+        const writingArea = document.getElementById('writingArea');
+        const blogMessage = document.getElementById('message');
+        const fontColorSelector = document.getElementById('fontColor');
+
+        if (writingArea) {
+            writingArea.addEventListener('input', function() {
+                const text = writingArea.value;
+                const words = text.split(/\s+/).filter(word => word.length > 0);
+                const wordCount = words.length;
+
+                if (wordCount >= 100) {
+                    blogMessage.style.display = 'block';
+                } else {
+                    blogMessage.style.display = 'none';
+                }
+            });
+
+            // Load saved content and settings when page loads
+            window.addEventListener('load', function() {
+                const savedBlogContent = localStorage.getItem('blogContent');
+                if (savedBlogContent) {
+                    writingArea.value = savedBlogContent;
+                    writingArea.dispatchEvent(new Event('input')); // Trigger input event to update word count message
+                }
+
+                const savedFontColor = localStorage.getItem('blogFontColor');
+                if (savedFontColor) {
+                    writingArea.style.color = savedFontColor;
+                    fontColorSelector.value = savedFontColor; // Set the selector to the saved color
+                }
+
+                const savedFontSize = localStorage.getItem('blogFontSize');
+                if (savedFontSize) {
+                    writingArea.style.fontSize = savedFontSize;
+                }
+            });
+
+            // Event listener for font color change
+            fontColorSelector.addEventListener('change', function() {
+                writingArea.style.color = this.value;
+                localStorage.setItem('blogFontColor', this.value);
+            });
+        }
+
+        // Function to change font size
+        function changeFontSize(change) {
+            if (writingArea) {
+                let currentSize = parseFloat(getComputedStyle(writingArea).fontSize);
+                let newSize = currentSize + change;
+                // Optional: set min/max font size
+                if (newSize < 10) newSize = 10;
+                if (newSize > 30) newSize = 30;
+
+                writingArea.style.fontSize = newSize + 'px';
+                localStorage.setItem('blogFontSize', newSize + 'px');
+            }
+        }
+
+        function saveContent() {
+            if (writingArea) {
+                localStorage.setItem('blogContent', writingArea.value);
+                alert('تم حفظ المحتوى بنجاح!');
+            }
+        }
+
+        function clearContent() {
+            if (writingArea && confirm('هل أنت متأكد أنك تريد حذف كل شيء؟')) {
+                writingArea.value = '';
+                blogMessage.style.display = 'none';
+                localStorage.removeItem('blogContent');
+                // Also clear font settings
+                localStorage.removeItem('blogFontColor');
+                localStorage.removeItem('blogFontSize');
+                // Reset to default styles
+                writingArea.style.color = '#34495E';
+                writingArea.style.fontSize = '1.4em';
+                if (fontColorSelector) fontColorSelector.value = '#34495E';
+                alert('تم حذف المحتوى.');
+            }
+        }
+
+        // --- Tasks Page Specific JavaScript ---
+        const tasksContainer = document.getElementById('tasksContainer');
+        const numTasks = 300;
+        const taskElements = [];
+        const tasksMotivationalPhrases = [ // Renamed for clarity, specifically for tasks page
+            'ابدأ الآن، ليس غدًا.',
+            'كل يوم هو فرصة جديدة.',
+            'لا شيء فعال على روح عازمة.',
+            'ثقة ديي، طموح مما تتخيل.',
+            'لاتخاذ ليس النهائي، بل بداية جديدة.',
+            'الاستمرار في التقدم، ولو بخطوات صغيرة.',
+            'تذكر لماذا بدأت.',
+            'تبدأ العظمة من المنطقة الخاصة بك.',
+            'اصنع اليوم شيئا يفخر به مستقبلك.',
+            'تحدى حدودك.',
+            'تقع قوتك في قدرتك على الصعود بعد كل شيء.',
+            'لا تخف من أن تكون مختلفًا.',
+            'أحط نفسك بالإيجابية.',
+            'التعلم غير محدد للأبد.',
+            'كل تجربة هي درس.',
+            'الغد الذي تريد أن تراه في العالم.',
+            'ركز على الحلول، لا مشاكل.',
+            'ايمانك هو مفتاح نجاحك.',
+            'لا يستهلك نبات النبات الكثير من اليوم.',
+            'مستقبلك يُصنع بما لا تفعله اليوم، لا غدًا.',
+            'افعل الأشياء بينما لا يزال لا يزال غيرين.',
+            'لا تتوقف عندما تتعب، تتوقف عندما ينتهي.',
+            'أسماءك تستحق الكفاح.',
+            'استثمر في نفسك.',
+            'كل خطوة صغيرة من هدفك.',
+            'التفاؤل هو القوة.',
+            'اصنع يومك.',
+            'كن جريئًا.',
+            'شكرا تغير كل شيء.',
+            'كل نفس فرصة جديدة للبدء.',
+            'أنت قوي مما تعتقد.',
+            'لا تقارن بدايتك بمن تصف طريق شخص آخر.',
+            'التطور لا يأتي من الروح.',
+            'عش بشغف.',
+            'لا تستسلم لأحلامك.',
+            'التحديات هي ما تجعل الحياة مثيرة.',
+            'اجعل كل يوم مهمة.',
+            'يعتبر كما لو أنه من المستحيل أن يفشل.',
+            'تجربة اختراع قوتك الداخلية.',
+            'كن مصدر الإلهام لله وللآخرين.',
+            'عقليتك هي كل شيء.',
+            'هان عن الجمال في كل يوم.',
+            'النجاح ليس نهائيًا، والفشل ليس قاتلًا، إنها خطة للاستمرار هي المهمة.',
+            'عش اللحظة.',
+            'كن طيبًا مع نفسك.',
+            'اتبع حدسك.',
+            'التغيير يبدأ منك.',
+            'لا تتردد في طلب المساعدة.',
+            'قدر القيمة التي تقدمها، زائر كان صغيرًا.',
+            'اليوم هو فرصتك لتبني الغد الذي تريده.',
+            'تذكر الدائم سبب بدئك.',
+            'كن أقوى من أعذارك.',
+            'اصنع السعادة بنفسك.',
+            'المثابرة تتحمل المستحيل.',
+            'غيّر أفكارك، تغير عالمك.',
+            'كل يوم هو صفحة جديدة في كتاب حياتك.',
+            'اجعل أحلامك أكبر من وثائقك.',
+            'لا تتوقف عن الحلم.',
+            'الفرص لا تحدث أنت جديدها.',
+            'لا تخف من وبالتالي، لا تخف من عدم المحاولة.',
+            'خذ، كل شيء ممكن.',
+            'ابدأ صغيرًا، فكر بشكل معقول.',
+            'ليس هناك خوف، بل التغلب عليه.',
+            'استغل اليوم، فهو هديتك.',
+            'تذكر أنك وحدك المسؤول عن سعادتك.',
+            'كن إيجابيًا دائمًا.',
+            'هان عن النور في كل مكان.',
+            'افعل المزيد مما يجعلك سعيدًا.',
+            'لا ترتبط بنفسك، ركز على هدفك.',
+            'النجاح هو مجموع الضربات الرئيسية.',
+            'عش اللحظة، واصنع منها ذكرى جميلة.',
+            'كل يوم فرصة لتصبح أفضل.',
+            'الكمال تبدأ بخطوات صغيرة.',
+            'لا تحدد ليأس أن عليك.',
+            'قدر كل لحظة في حياتك.',
+            'لا يوجد شيء، فقط إرادة.',
+            'كن مصدر إلهامتك الجديدة.',
+            'التغيير يبدأ منك ومن داخلك.',
+            'اجعل التفاؤل حياة.',
+            'التحديات هي فرص للنمو.',
+            'كن أنت، فالعالم يحتاجك.',
+            'لا تلتفت إلى الغد، امضِ.',
+            'اليوم هو فرصتك الوحيدة.',
+            'استمع إلى قلبك.',
+            'لا تسمح للظروف بقبولك.',
+            'كل يوم هو معجزة.',
+            'كاتب شجاع من مشاعرك.',
+            'قم بما يلهمك.',
+            'أمسك قديماً، والغد لم يأتِ بعد، عش اليوم.',
+            'كن بطلاً في قصة حياتك.',
+            'الحياة قصيرة، عشها بشغف.',
+            'لا تقل "لا"، قل "سأحاول".',
+            'اجعل إيمانك أكبر من أهدافك.',
+            'انت.',
+            'ابحث عن الفرص في كل التحدي.',
+            'عش لتُلهم.',
+            'كن قويًا، لأن الحياة تستمر.',
+            'كل جهد صغير جزء من شيء.',
+            'لا تتوقف عن الإيمان.',
+            'مستقبلك ينتظرك.',
+            'قوتك تضع في قدرتك على التكيف.',
+            'كن مرنًا كشجرة الخيزران.',
+            'أصنع لنفسك يومًا مليئًا بالانتصارات الصغيرة.',
+            'العطاء هو أرقى قوة.',
+            'لا تتوقف عن التعلم والنمو.',
+            'كل يوم فرصة لترك بصمة.',
+            'ابحث عن التفاصيل الصغيرة.',
+            'ممتنًا لما لديك، وستحصل على المزيد.',
+            'القراءة هو قوتك في عالم صخب.',
+            'لا تنتظر الإذن، افعلها الآن.',
+            'ابتكر طريقك الخاص، ولا يترتب على الحشود.',
+            'كل نفس هو فرصة للتأمل.',
+            'قدر رحلتك، لا وجهتك فقط.',
+            'استمع إلى صمتك الداخلي.',
+            'كن سيد وقتك.',
+            'التحديات هي مغلفة الهدايا.',
+            'لا تكن نسخة، كن أصليًا.',
+            'أطلق العنان لإبداعك.',
+            'القوة والقدرة على التحمل.',
+            'عش بوعي وحضور.',
+            'الفضول هو بداية كل اكتشاف.',
+            'لا شيء يضاهي تنفيذ المهام المستحيلة.',
+            'أوجد التوازن في حياتك.',
+            'اجعل الحب هو الدافع الأكبر.',
+            'كل لحظة هي بداية جديدة.',
+            'لا تدع خوف يسرق أحلامك.',
+            'اصنع السلام في عالمك الداخلي.',
+            'كن شجاعًا بما يكفي لتتبع قلبك.',
+            'كوم عن كل ما يستنزف طاقتك.',
+            'أعد شحن طاقتك بالصمت.',
+            'لا تعلم الظروف، اصنعها.',
+            'كن التغيير الذي تبحث عنه.',
+            'كل يوم هو فرصة للتألق.',
+            'عش حياتك بفخر.',
+            'لا تستسلم للضغط، بل اصنعه.',
+            'هدفك أن تشتري الجهد.',
+            'تذكر أنك صانع سعادتك.',
+            'اجعل الفرح هدفك اليومي.',
+            'كن مصدر إلهامتك الجديدة.',
+            'التواضع ترتفع قدرك.',
+            'الحياة مغامرة، عشها بجرأة.',
+            'كل الولايات هي فرصة للنمو.',
+            'ابحث عن الدروس في كل تجربة.',
+            'لا تتردد في الظهور من جديد.',
+            'كن النور في طريقك.',
+            'عش الامتنان.',
+            'قوة الأرشيف لا حدود لها.',
+            'كن أنت الغد الذي Forever For Forever.',
+            'اليوم هو اليوم المثالي للبدء.',
+            'اتركها طيبا وذهبت.',
+            'قوّي آرتيك، لا جسدك فقط.',
+            'لا تكن رهينة الماضي.',
+            'كل صباح هو ولادة جديدة لفرصة.',
+            'تعامل مع عادتك اليومية.',
+            'تصبح شجاعة، بما في ذلك لتصبح جديدة في المستقبل.',
+            'كاملة هي سر القوة.',
+            'ابنِ جسورًا لا جدرانًا.',
+            'كل الولايات يخبئ له فرصة.',
+            'يبدأ باحترام الذات.',
+            'لا تتوقف عن التعلم من أخطائك.',
+            'اتبع فضولك، وقد قادك إلى وجهة نظر رائعة.',
+            'سعادتك هي لاتك.',
+            'اطلق العنان لقوة التفاؤل.',
+            'العزيمة تصنع الفارق.',
+            'كن أنت نورك الخاص.',
+            'لا تدع أحدًا طفئ بريقك.',
+            'استمتع بالرحلة، لا بالوجهة فقط.',
+            'كل نجاح كبير يبدأ بفكرة صغيرة.',
+            'غدًا مؤلمًا، لكن لا شيء مؤلم أكثر من البقاء.',
+            'اجعل يومك تحفة فنية.',
+            'لا تخف من إعادة تعريف نفسك.',
+            'كن هادئًا وقويًا.',
+            'الحياة الطويلة من أن تُعاش أنت تستجيب.',
+            'اصنع أثرا إيجابيا وذهبت.',
+            'عش حياتك بقصد.',
+            'لا شيء يحدث بالصدفة، كل شيء يحدث بسبب.',
+            'التفكير المحرك يؤدي إلى نتائج إيجابية.',
+            'كل يوم هو فرصة لتكتشف شيئًا جديدًا عن نفسك.',
+            'مستقبلك الجديد الآن.',
+            'التسامح يحرر الروح.',
+            'كن حكيمًا في اختياراتك.',
+            'لتتواصل بصوت أعلى من الكلمات.',
+            'لا تخجل من أحلامك الكبيرة.',
+            'تطور جزء من هويتك.',
+            'كن مصدر إلهام لكل من حولك.',
+            'كل الولايات هو خطوة نحو النمو.',
+            'عش اللحظة بكل تفاصيلها.',
+            'قوة عقل هي شجاع أسلحتك.',
+            'الأمل هو وقود الروح.',
+            'ابدأ من حيث أنت، استخدم ما لديك، افعل ما تفعله.',
+            'لا يوجد فشل، فقط دروس الاستفادة.',
+            'كن طيبًا، حتى عندما يكون العالم قاسيًا.',
+            'اجعل تأملك حديقتك، وازرع فيها النجاح.',
+            'لا تتوقف عن الإيمان بالمعجزات.',
+            'كل قرار صغير يبني مستقبلك.',
+            'استمتع بكل لحظة من رحلة الحياة.',
+            'التزم بأهدافك أنت تعتمد عليها.',
+            'كن شاكرًا لكل يوم جديد.',
+            'التحديات موجودة لتجعلك مؤلم.',
+            'اصنع المستحيل بإيمانك.',
+            'يبدأ التغيير من داخل منطقة راحتك.',
+            'لا تستسلم، بسبب النصر الذي يخلفه العقبة التالية.',
+            'كن صانع الفرص، لا تنتظرها.',
+            'سليمة الجسم في سليمة.',
+            'التعاون المعجزات.',
+            'كل يوم هو فرصة لمراجعة أهدافك.',
+            'ابنِ مستقبلك حجرة بحجرة.',
+            'لا تتأخر بسبب طلب المساعدة.',
+            'واهمية السرعة.',
+            'عش الصبر حليفك الأكبر.',
+            'تعلم أن تستمع أكثر مما تتكلم.',
+            'كل تحد هو جسر للنجاح.',
+            'أطلق العنان لقوة التخيل.',
+            'كن قدوة حسنة للمرة الأولى.',
+            'لا تدع الإخفاقات في تسجيل مستقبلك.',
+            'قوة الإله تأتي من الداخل.',
+            'استمتع برحلة التعلم.',
+            'كن شاكرًا للأيام الصعبة، فهي تعمل بجد.',
+            'ابدأ اليوم، ولا تؤجل أحلامك.',
+            'اختر أن تكون سعيدًا، بغض النظر عن الظروف.',
+            'لا لأمر يتعلق بتأثيرك على الآخرين.',
+            'ليصبح هو مفتاح التطور.',
+            'اجعل العزيمة وقودك الجديد.',
+            'كل صباح هو فرصة جديدة للتفوق.',
+            'لا شيء ينمي الروح مثل صح.',
+            'كن مهدئًا، موثوقًا بطريقة أفضل.',
+            'الحياة تعلمك دروسها الخاصة.',
+            'لا تنتظر الكمال لتبدأ.',
+            'كل خطأ هو فرصة للتحسين.',
+            'ThinkDriver يفتح الأبواب.',
+            'اجعل شغفك هو دافعك.',
+            'لا تتبع القطيع، اصنع طريقك.',
+            'التواضع هو بداية كل حكمة.',
+            'قوة الإيمان وتدفعك.',
+            'لا يوجد أي تغيير في مشروعك، لا هدفك.',
+            'التزم بعودك أولاً.',
+            'اجعل هدفك أكبر من أهدافك.',
+            'كن جريئًا، كن مختلفًا، كن أنت.',
+            'كل النجاح الكبير يبدأ بقرار.',
+            'استمدت القوة من ضعف نقاطك.',
+            'شيء لاذون عليه من يمتلك العزيمة.',
+            'أحب، واعمل بشغف.',
+            'اجعل عقلك مصنعًا لأفكار إيجابية.',
+            'كن متفائلاً، فال الأشياء الضارة تتحدث.',
+            'هان عن الأمل في كل زاوية.',
+            'أنت المسؤول عن طاقتك الوحيدة.',
+            'التطور يعني تجاوز نفسك السابقة.',
+            'لا تدع الشك يسرق أحلامك.',
+            'اليوم هو اليوم بدءا بما تخافه.',
+            'اجعل الامتنان رفيق دربك.',
+            'قوّي صمتك، فهو شديد من ألف كلمة.',
+            'لا تدع ضجيج الآخرين يطغى على صوتك الداخلي.',
+            'كل يوم هو فرصة المتاحة للامتنان.',
+            'كن مبدعًا في عالمك الخاص.',
+            'التعلم مدى الحياة هو شباب جديد.',
+            'انظر إلى التحديات كفرصة مقنعة.',
+            'ابنِ جسورًا من التفاهم، لا حواجز.',
+            'مركزك الأساسي هو ضعف نقاطك.',
+            'لا تنتظر الإلهام، كن أنت الإلهام.',
+            'اجعل عقلك حديقتك، وليس مهملات.',
+            'اتبع خاطيك الغريزي، فهو نادرًا ما يخطئ.',
+            'كل لحظة هي بداية لقصة جديدة.',
+            'قدر قيمتك الذاتية، فهي لا تقدر بثمن.',
+            'استثمر في الأرشيف، فهو أصولك الثمينة.',
+            'لا تخف من أن تكون فريدًا وغير مألوف.',
+            'كن نورًا لنفسك في الظلام.',
+            'التطور غير محدد إلى الأبد.',
+            'رحلة الحياة، استمتع بكل خطوة.',
+            'الشغف هو وقود الروح.',
+            'اجعل أهدافك أكبر من أعذارك.',
+            'كن واعيًا بكل نفس تأخذه.',
+            'لا تلم الماضي، ابنِ المستقبل.',
+            'قوة تحول الأحلام إلى الحقيقة.',
+            'استمتع بلحظات الهدوء والتأمل.',
+            'كل يوم هو فرصة للتعرف على نسخة أفضل من نفسك.',
+            'لا تتردد في التعبير عن امتنانك للعالم.',
+            'كن مصدراً لتهديد الناس.',
+            'ابحث عن السحر في الحياة اليومية، إنه موجود حولك.',
+            'هي القدرة على تقدير كل شيء بعد كل شيء.',
+            'اجعل اللطفرك الأساسي في التعامل.',
+            'لا تقارن فصول حياتك بفصول حياة الآخرين.',
+            'الثقة بالنفس هي أساس كل إنجاز عظيم.',
+            'التوازن بين العمل هو مفتاح السعادة.',
+            'عش بشغف وامتنان.',
+            'كل تجربة هي فرصة للتعلم والتطور.',
+            'لاتسبب التهابات متحدة منكم.',
+            'اجعل هدفك هو أن يترك العالم أفضل مما وجده.',
+            'سوف تصبح جديدًا بما في ذلك سوف تكون ضعيفًا.',
+            'قوة أنيمي هي أداة لا تُقهر.',
+            'بعد هي مفتاح تحقيق الأحلام.',
+            'لا يوجد فندق لما تمكنت من النجاح بإيمانك.',
+            'كل ما يبدأ للبدء بشجاعة.',
+            'اجعل الإيمان بنفسك هو الدافع الأكبر.',
+            'كن متفائلاً، فال الأشياء الجميلة.',
+            'ابحث عن النور حتى في الظلام.',
+            'أنت تملك القدرة على تغيير حياتك للأفضل.',
+            'الشكر يمنع بابا لم تكن تتوقعها.',
+            'لا تتوقف بعد ذلك نحو التميز في كل جانب.',
+            'اليوم هو فرصتك لتصنع فرقًا لا يُنسى.',
+            'عش حياتك كتحفة فنية، كل يوم هو لمسة فرشاة.',
+            'لا تكن مجرد صدى، كن صوتًا فريدًا.',
+            'كل صباح هو فرصة لتُظهر للعالم من أنت.',
+            'اجعل الإلهام ينبع من داخلك.',
+            'كن شجاعًا بما يكفي لتحدى الوضع الراهن.',
+            'المثابرة هي الباب لفتح الأبواب .',
+            'ابنِ إرثًا من العطاء والتميز.',
+            'لا تتردد في طلب العون من الكون.',
+            'ولذلك هي قدرتك على الانحناء دون أن تنكسر.',
+            'اجعل الشغف دليلك في كل مسعى.',
+            'تعلم أن تستمع أكثر مما تتكلم.'
+        ];
+
+
+        function createTaskItem(index) {
+            const taskItem = document.createElement('div');
+            taskItem.className = 'task-item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'task-checkbox';
+            checkbox.id = `task-${index}`;
+
+            const textArea = document.createElement('textarea');
+            textArea.className = 'task-text';
+            textArea.placeholder = `المهمة رقم ${index + 1}`;
+            textArea.rows = 1;
+
+            checkbox.addEventListener('change', function() {
+                if (checkbox.checked) {
+                    textArea.classList.add('completed');
+                } else {
+                    textArea.classList.remove('completed');
+                }
+                saveTasks();
+            });
+
+            textArea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+                saveTasks();
+            });
+
+            taskItem.appendChild(checkbox);
+            taskItem.appendChild(textArea);
+            tasksContainer.appendChild(taskItem);
+
+            return { checkbox, textArea };
+        }
+
+        if (tasksContainer) {
+            // Generate 300 task items
+            for (let i = 0; i < numTasks; i++) {
+                taskElements.push(createTaskItem(i));
+            }
+
+            function saveTasks() {
+                const tasksData = [];
+                taskElements.forEach((item, index) => {
+                    tasksData.push({
+                        text: item.textArea.value,
+                        checked: item.checkbox.checked
+                    });
+                });
+                localStorage.setItem('tasksData', JSON.stringify(tasksData));
+            }
+
+            function loadTasks() {
+                const savedTasks = localStorage.getItem('tasksData');
+                if (savedTasks) {
+                    const tasksData = JSON.parse(savedTasks);
+                    tasksData.forEach((data, index) => {
+                        if (taskElements[index]) {
+                            taskElements[index].textArea.value = data.text;
+                            taskElements[index].checkbox.checked = data.checked;
+                            taskElements[index].checkbox.dispatchEvent(new Event('change')); // Trigger change to apply 'completed' class
+                            taskElements[index].textArea.dispatchEvent(new Event('input')); // Trigger input to adjust height
+                        }
+                    });
+                }
+            }
+            window.addEventListener('load', loadTasks);
+
+            function displayTasksMotivationalPhrase() { // Renamed function
+                const phraseElement = document.getElementById('motivationalPhrase');
+                const randomIndex = Math.floor(Math.random() * tasksMotivationalPhrases.length);
+                phraseElement.textContent = tasksMotivationalPhrases[randomIndex];
+            }
+        }
+    </script>
+</body>
+</html>
