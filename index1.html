@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منارة الإسلام</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- تنسيقات CSS العامة --- */
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4; /* لون خلفية افتراضي فاتح */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            text-align: center;
+            overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي */
+        }
+
+        .page {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none; /* لإخفاء الصفحات افتراضياً */
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .page.active {
+            display: flex; /* لإظهار الصفحة النشطة */
+        }
+
+        /* --- تنسيقات الصفحة الرئيسية --- */
+        #main-page .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* للسماح بالعناصر بالنزول لسطر جديد على الشاشات الصغيرة */
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        #main-page .header .logo {
+            max-width: 100px; /* حجم أصغر للوجو في الصفحة الرئيسية */
+            height: auto;
+            margin-left: 20px; /* مسافة بين اللوجو والعنوان */
+        }
+
+        #main-page .header h1 {
+            color: gold;
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #main-page .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .main-button {
+            background-color: #007bff; /* أزرق داكن */
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            font-size: 1.8em;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-button:hover {
+            background-color: #0056b3; /* أزرق أغمق عند التمرير */
+            transform: translateY(-3px);
+        }
+
+        /* --- تنسيقات السبحة الإلكترونية --- */
+        #tasbeeh-page .tasbeeh-counter {
+            font-size: 6em;
+            color: #28a745; /* أخضر */
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #tasbeeh-page .tasbeeh-button {
+            background-color: #28a745; /* أخضر */
+            color: white;
+            border: none;
+            border-radius: 50%; /* شكل دائري */
+            width: 180px;
+            height: 180px;
+            font-size: 2.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        #tasbeeh-page .tasbeeh-button:hover {
+            background-color: #218838; /* أخضر أغمق عند التمرير */
+            transform: scale(1.05);
+        }
+
+        #tasbeeh-page .count-box {
+            background-color: #e9ecef;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.5em;
+            color: #555;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+            font-weight: 600;
+        }
+
+        #tasbeeh-page .back-button {
+            background-color: #6c757d; /* رمادي */
+            margin-top: 40px;
+        }
+        #tasbeeh-page .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* --- تنسيقات صفحة القرآن الكريم --- */
+        #quran-page iframe {
+            width: 100%;
+            height: 70vh; /* ارتفاع جيد لعرض المصحف */
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #quran-page .back-button {
+            background-color: #6c757d; /* رمادي */
+        }
+        #quran-page .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        /* --- الأزرار العودة المشتركة --- */
+        .back-button {
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        /* --- Media Queries للتجاوبية --- */
+        @media (max-width: 600px) {
+            .page {
+                padding: 20px;
+            }
+            #main-page .header .logo {
+                max-width: 80px;
+                margin-bottom: 10px; /* مسافة أكبر أسفل اللوجو في الشاشات الصغيرة */
+                margin-left: 0; /* إلغاء المسافة الجانبية */
+            }
+            #main-page .header h1 {
+                font-size: 2.5em;
+            }
+            .main-button {
+                font-size: 1.5em;
+                padding: 15px 20px;
+            }
+            #tasbeeh-page .tasbeeh-counter {
+                font-size: 4em;
+            }
+            #tasbeeh-page .tasbeeh-button {
+                width: 150px;
+                height: 150px;
+                font-size: 2em;
+            }
+            #tasbeeh-page .count-box {
+                font-size: 1.2em;
+            }
+            #quran-page iframe {
+                height: 60vh;
+            }
+            .back-button {
+                font-size: 1.1em;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-page" class="page active">
+        <div class="header">
+            <img src="https://e7twaa.com/wp-content/uploads/2024/02/ugyl52np.jpg" alt="لوجو منارة الإسلام" class="logo">
+            <h1>منارة الإسلام</h1>
+        </div>
+        <div class="buttons-container">
+            <button class="main-button" onclick="showPage('tasbeeh-page')">سبحة إلكترونية</button>
+            <button class="main-button" onclick="showPage('quran-page')">القرآن الكريم</button>
+        </div>
+    </div>
+
+    <div id="tasbeeh-page" class="page">
+        <h2 style="color: #007bff; margin-bottom: 30px;">سبحة إلكترونية</h2>
+        <div id="tasbeeh-counter" class="tasbeeh-counter">0</div>
+        <button class="tasbeeh-button" onclick="incrementTasbeeh()">اضغط للتسبيح</button>
+        <div class="count-box">
+            عدد مرات التسبيح الكلي: <span id="total-tasbeeh-count">0</span>
+        </div>
+        <button class="back-button" onclick="showPage('main-page')">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <div id="quran-page" class="page">
+        <h2 style="color: #007bff; margin-bottom: 30px;">القرآن الكريم</h2>
+        <iframe src="https://quran.ksu.edu.sa/index.php?ui=1#aya=2_6&m=hafs&qaree=husary&trans=ar_mu" frameborder="0"></iframe>
+        <button class="back-button" onclick="showPage('main-page')">العودة للصفحة الرئيسية</button>
+    </div>
+
+    <script>
+        let tasbeehCount = 0;
+        let totalTasbeehCount = parseInt(localStorage.getItem('totalTasbeehCount')) || 0; // تحميل العدد الكلي من الذاكرة المحلية
+
+        const tasbeehCounterDisplay = document.getElementById('tasbeeh-counter');
+        const totalTasbeehCountDisplay = document.getElementById('total-tasbeeh-count');
+
+        // تحديث عرض العدد الكلي عند تحميل الصفحة
+        totalTasbeehCountDisplay.textContent = totalTasbeehCount;
+
+        function incrementTasbeeh() {
+            tasbeehCount++;
+            totalTasbeehCount++;
+            tasbeehCounterDisplay.textContent = tasbeehCount;
+            totalTasbeehCountDisplay.textContent = totalTasbeehCount;
+            localStorage.setItem('totalTasbeehCount', totalTasbeehCount); // حفظ العدد الكلي
+        }
+
+        function showPage(pageId) {
+            // إخفاء كل الصفحات
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // إظهار الصفحة المطلوبة
+            document.getElementById(pageId).classList.add('active');
+
+            // إذا رجعنا للصفحة الرئيسية أو لصفحة السبحة، نصفر عداد التسبيح الحالي
+            if (pageId === 'main-page' || pageId === 'tasbeeh-page') {
+                tasbeehCount = 0;
+                tasbeehCounterDisplay.textContent = tasbeehCount;
+            }
+        }
+    </script>
+</body>
+</html>
